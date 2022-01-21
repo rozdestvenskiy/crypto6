@@ -1,6 +1,5 @@
 n = 5000
-primes = [x for x in range(2, n + 1) if x not in [i for sub in [list(range(2 * j, n + 1, j))
-        for j in range(2, n // 2)] for i in sub]]
+primes = [x for x in range(2, n + 1) if x not in [i for sub in [list(range(2 * j, n + 1, j)) for j in range(2, n // 2)] for i in sub]]
 import random
 random.seed()
 print(primes[10])
@@ -54,7 +53,7 @@ print('private key: ', d, n)
 # here should be fast umnozhenie po modulu lol kek cheburek
 
 
-def pow_h(base, degree, module):
+def rsa_scf(base, degree, module):
     degree = bin(degree)[2:]
     r = 1
 
@@ -64,10 +63,8 @@ def pow_h(base, degree, module):
 
     return r
 
-
-x = pow_h(1488, e, n)
-#x = pow(1488, e) % n
-#y = pow(x, d) % n
-y = pow_h(x, d, n)
-
-print(y)
+Message = 1020304050
+scf = rsa_scf(Message, e, n)
+print(scf)
+unscf = rsa_scf(scf, d, n)
+print(unscf)
